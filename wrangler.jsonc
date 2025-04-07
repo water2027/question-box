@@ -1,0 +1,14 @@
+{
+	"name": "question-box",
+	"pages_build_output_dir": "dist",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "Test",
+			"database_id": "da5c1003-e090-4b2f-94f7-9568d6d81348",
+			"migrations_dir": "drizzle"
+		}
+	],
+	"compatibility_flags": ["nodejs_compat"],
+	"compatibility_date": "2025-01-02"
+}
