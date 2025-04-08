@@ -34,7 +34,7 @@
 			<div class="text-center mt-4">
 				<a-button
 					type="link"
-					@click="router.push('/')"
+					@click="navigateTo('/')"
 				>
 					返回首页
 				</a-button>
@@ -58,7 +58,7 @@ const onFinish = async () => {
 	submitting.value = true;
 	localStorage.setItem('token', formState.password); // 模拟登录成功
 	console.log(formState.password);
-	router.push('/'); // 登录成功后跳转到首页
+	navigateTo('/'); // 登录成功后跳转到首页
 };
 </script>
 

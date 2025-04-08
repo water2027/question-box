@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 		cursor = parseInt(body.cursor as string, 10) || 0;
 	}
 	if (id === -1 || cursor === 0) {
-		return {}
+		return [];
 	}
 
 	const { db } = event.context;

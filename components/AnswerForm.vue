@@ -54,7 +54,7 @@ const onFinish = async () => {
 	try {
 		const token = localStorage.getItem('token');
 		if (!token) {
-			router.push('/login')
+			navigateTo('/login')
 			throw new Error('用户未登录');
 		}
 		const res = await $fetch('/api/answer/create', {

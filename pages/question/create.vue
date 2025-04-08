@@ -74,12 +74,12 @@ const onFinish = async () => {
 			},
 		});
 
-		if (!data || data.status !== 'success') {
+		if (!data) {
 			throw new Error('发布问题失败');
 		}
 
 		message.success('问题已发布');
-		router.push(`/question/${data.value.id}`);
+		navigateTo(`/question/${data.value.id}`);
 	} catch (error) {
 		console.error('发布问题失败', error);
 		message.error('发布失败，请重试');

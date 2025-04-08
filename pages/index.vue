@@ -4,7 +4,7 @@
 			<h1 class="text-2xl font-bold">匿名提问箱</h1>
 			<a-button
 				type="primary"
-				@click="router.push('/question/create')"
+				@click="navigateTo('/question/create')"
 			>
 				提问
 			</a-button>
@@ -80,8 +80,8 @@ const loadMoreQuestions = () => {
 	loadQuestions();
 };
 
-const goToDetail = (id) => {
-	router.push(`/question/${id}`);
+const goToDetail = async (id) => {
+	await navigateTo(`/question/${id}`);
 };
 
 const { data: cursor } = await useFetch('/api/question/nums', {

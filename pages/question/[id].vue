@@ -46,7 +46,7 @@
 				<a-list
 					:loading="loadingAnswers"
 					item-layout="horizontal"
-					:data-source="answers"
+					:data-source="answers||[]"
 				>
 					<template #renderItem="{ item }">
 						<AnswerItem :answer="item">
@@ -82,6 +82,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { message } from 'ant-design-vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -159,7 +160,7 @@ const deleteAnswer = async (id) => {
 	try {
 		const token = localStorage.getItem('token');
 		if (!token) {
-			router.push('/login');
+			navigateTo('/login');
 			throw new Error('用户未登录');
 		}
 		await $fetch('/api/answer', {
