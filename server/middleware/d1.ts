@@ -1,10 +1,8 @@
 import { drizzle, DrizzleD1Database } from 'drizzle-orm/d1';
-import { usersTable } from '~/server/db/schema/user';
 import { questionsTable } from '../db/schema/question';
 import { answersTable } from '~/server/db/schema/answer';
 
 const schema = {
-	usersTable,
 	questionsTable,
 	answersTable,
 };

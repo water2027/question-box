@@ -1,35 +1,34 @@
-import { eq } from 'drizzle-orm';
+import { eq, and, lte } from 'drizzle-orm';
 import { answersTable } from '~/server/db/schema/answer';
 
 export default defineEventHandler(async (event) => {
 	const body = await readBody(event);
 	let id = -1; // 问题id
+	let cursor = 0;
 	let limit = 10;
-	let offset = 0;
 	if (body) {
 		id = body.id || -1;
-		limit = body.limit || 10;
-		offset = body.offset || 0;
+		limit = parseInt(body.limit as string, 10) || 10;
+		cursor = parseInt(body.cursor as string, 10) || 0;
 	}
-	if (id === -1) {
-		throw createError({
-			statusCode: 400,
-			statusMessage: 'Bad Request',
-			data: 'id is required',
-		});
+	if (id === -1 || cursor === 0) {
+		return {}
 	}
 
 	const { db } = event.context;
-	const questions = await db
+	const answers = await db
 		.select({
 			id: answersTable.AnswerId,
 			content: answersTable.AnswerContent,
 			createdAt: answersTable.CreatedAt,
 		})
 		.from(answersTable)
-		.where(eq(answersTable.QuestionId, id))
-		.limit(limit)
-		.offset(offset)
-		.all();
-	return questions;
+		.where(
+			and(
+				eq(answersTable.QuestionId, id),
+				lte(answersTable.AnswerId, cursor)
+			)
+		)
+		.limit(limit);
+	return answers;
 });
